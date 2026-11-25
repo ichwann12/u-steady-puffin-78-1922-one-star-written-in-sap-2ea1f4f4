@@ -12,6 +12,9 @@ if (entry.length === 0 || entry.replace(/\n$/, "").length >= 280) {
   throw new Error("entry.txt must be non-empty and under 280 characters");
 }
 
+// Output dir: the runner sets MAKEFUN_BOT_DIR (preferred) or
+// MAKEFUN_OUTPUT_DIR; without either, fall back to a local ./output
+// folder so `node main.ts` still works standalone.
 const outDir =
   process.env.MAKEFUN_BOT_DIR ?? process.env.MAKEFUN_OUTPUT_DIR ?? join(here, "output");
 mkdirSync(outDir, { recursive: true });
